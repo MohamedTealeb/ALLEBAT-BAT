@@ -1,0 +1,151 @@
+
+import { Box, Typography, Container, Card, CardContent } from '@mui/material';
+import Image from 'next/image';
+
+function Services() {
+  const services = [
+    {
+      id: 1,
+      image: '/1.png',
+      title: 'Travaux de construction et de démolition',
+      description: 'Construction neuve, démolition de bâtiments, rénovation complète, gros œuvre et second œuvre.'
+    },
+    {
+      id: 2,
+      image: '/2.png',
+      title: 'Finitions intérieures et extérieures',
+      description: 'Pose de carrelage, travaux de peinture, parements en plâtre, décoration intérieure et finitions.'
+    },
+    {
+      id: 3,
+      image: '/3.png',
+      title: 'Installations et systèmes techniques',
+      description: 'Électricité, gaz, chauffage central, plomberie, installations d\'eau, et systèmes de ventilation.'
+    },
+    {
+      id: 4,
+      image: '/4.png',
+      title: 'Isolation et entretien des bâtiments',
+      description: 'Isolation thermique et acoustique, toitures et des murs, traitement de l\'humidité, entretien global des immeubles.'
+    }
+  ];
+
+  return (
+    <Box
+      sx={{
+        backgroundColor: '#f8f9fa',
+        padding: { xs: '60px 0', md: '80px 0' },
+      }}
+    >
+      <Container maxWidth="xl">
+        {/* Section Title */}
+        <Typography
+          variant="h2"
+          sx={{
+            textAlign: 'center',
+            fontWeight: 'bold',
+            fontSize: { xs: '2rem', md: '2.5rem' },
+            color: '#333',
+            marginBottom: '60px',
+          }}
+        >
+          Nos Services
+        </Typography>
+
+        {/* Services Grid */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr 1fr' },
+            gap: 4,
+          }}
+        >
+          {services.map((service) => (
+            <Box key={service.id}>
+              <Card
+                sx={{
+                  height: '100%',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.08)',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  border: 'none',
+                  borderTop: '4px solid #EF6C00',
+                  overflow: 'hidden',
+                  '&:hover': {
+                    transform: 'translateY(-3px)',
+                    boxShadow: '0 8px 25px rgba(0, 0, 0, 0.12)',
+                  },
+                }}
+              >
+                <CardContent
+                  sx={{
+                    padding: '25px 18px',
+                    textAlign: 'center',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  {/* Service Image Circle */}
+                  <Box
+                    sx={{
+                      width: '70px',
+                      height: '70px',
+                      borderRadius: '50%',
+                      backgroundColor: '#EF6C00',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto 20px auto',
+                      boxShadow: '0 3px 12px rgba(239, 108, 0, 0.25)',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      width={40}
+                      height={40}
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </Box>
+
+                  {/* Service Title */}
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 'bold',
+                      fontSize: '15px',
+                      color: '#333',
+                      marginBottom: '12px',
+                      lineHeight: 1.3,
+                      minHeight: '40px',
+                    }}
+                  >
+                    {service.title}
+                  </Typography>
+
+                  {/* Service Description */}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontSize: '13px',
+                      color: '#777',
+                      lineHeight: 1.5,
+                      flexGrow: 1,
+                      textAlign: 'center',
+                    }}
+                  >
+                    {service.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+          ))}
+        </Box>
+      </Container>
+    </Box>
+  );
+}
+
+export default Services;

@@ -110,7 +110,7 @@ function Travaux() {
               construction neuve, la démolition sécurisée, la rénovation et les
               finitions de base selon les plus hauts standards de qualité et de
               sécurité. Nous garantissons des bâtiments solides, durables, avec
-              des designs raffinés qui reflètent l'élégance et le prestige dans
+              des designs raffinés qui reflètent l&apos;élégance et le prestige dans
               chaque détail.
             </Typography>
 

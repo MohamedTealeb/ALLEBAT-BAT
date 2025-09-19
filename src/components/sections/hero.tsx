@@ -77,7 +77,7 @@ function Hero() {
                   marginBottom: '30px',
                 }}
               >
-                Nous créons et rénovons des espaces avec un esprit moderne, en soignant chaque détail. Nous garantissons solidité, sécurité et design raffiné, avec des solutions durables qui préservent la qualité et l'élégance de vos lieux.
+                Nous créons et rénovons des espaces avec un esprit moderne, en soignant chaque détail. Nous garantissons solidité, sécurité et design raffiné, avec des solutions durables qui préservent la qualité et l&apos;élégance de vos lieux.
               </Typography>
 
               {/* Contact Button */}

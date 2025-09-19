@@ -175,7 +175,7 @@ function Stats() {
                   letterSpacing: '0.5px',
                 }}
               >
-                Années d'expérience
+                Années d&apos;expérience
               </Typography>
             </Box>
 

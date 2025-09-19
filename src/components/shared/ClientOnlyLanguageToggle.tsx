@@ -22,21 +22,8 @@ const ClientOnlyLanguageToggle: React.FC<ClientOnlyLanguageToggleProps> = ({
   }, []);
 
   if (!mounted) {
-    // Return a placeholder during SSR that matches the expected structure
-    return (
-      <div style={{ 
-        width: '200px', 
-        height: '50px', 
-        backgroundColor: '#f5f5f5', 
-        borderRadius: '25px',
-        border: '2px solid #ddd',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <span style={{ color: '#666', fontSize: '14px' }}>Loading...</span>
-      </div>
-    );
+    // Return null during SSR to avoid hydration mismatch
+    return null;
   }
 
   return (

@@ -70,9 +70,7 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
           boxShadow: currentLanguage === 'arabic' ? '0 2px 8px rgba(239, 108, 0, 0.3)' : 'none',
         }}
       >
-        <span style={{ color: currentLanguage === 'arabic' ? 'white' : '#000' }}>
-          Arabic
-        </span>
+        Arabic
       </Button>
     </Box>
   );

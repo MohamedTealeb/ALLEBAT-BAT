@@ -2,59 +2,50 @@ import { Box, Typography, Container } from '@mui/material';
 
 function Stats() {
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        backgroundColor: '#BEBEBE',
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        backgroundImage: 'url("/Rectangle 3364.png")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-    
-        marginTop: { xs: '60px', md: '100px' },
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 1,
-        }
-      }}
-    >
-        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: { xs: '20px', md: '40px' },
-              flexDirection: { xs: 'column', md: 'row' },
-              
-              minHeight: '80vh',
-              padding: { xs: '20px', md: '40px' },
-            }}
-          >
+    <Box sx={{ 
+      marginTop: { xs: '60px', md: '100px' },
+      backgroundColor: '#BEBEBE',
+      paddingBottom: { xs: '40px', md: '60px' }
+    }}>
+      {/* Background Image */}
+      <Box
+        sx={{
+          width: '100%',
+          height: { xs: '400px', md: '600px' },
+          backgroundImage: 'url("/Rectangle 3364.png")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      
+      {/* Stats Cards Section */}
+      <Container maxWidth="xl" sx={{ marginTop: { xs: '-120px', md: '-150px' }, position: 'relative', zIndex: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: { xs: '20px', md: '40px' },
+            flexDirection: { xs: 'column', md: 'row' },
+            padding: { xs: '20px', md: '40px' },
+          }}
+        >
             {/* Projects Card */}
             <Box
               sx={{
                 backgroundColor: 'white',
                 borderRadius: '8px',
-                padding: { xs: '20px', md: '25px' },
+                padding: { xs: '30px', md: '35px' },
                 textAlign: 'center',
                 boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
-                minWidth: { xs: '250px', md: '280px' },
-                minHeight: { xs: '140px', md: '160px' },
+                minWidth: { xs: '280px', md: '320px' },
+                minHeight: { xs: '200px', md: '240px' },
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '15px',
+                gap: '20px',
               }}
             >
               {/* Icon */}
@@ -114,17 +105,16 @@ function Stats() {
               sx={{
                 backgroundColor: 'white',
                 borderRadius: '8px',
-                padding: { xs: '20px', md: '25px' },
+                padding: { xs: '30px', md: '35px' },
                 textAlign: 'center',
                 boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
-                minWidth: { xs: '250px', md: '280px' },
-                minHeight: { xs: '140px', md: '160px' },
+                minWidth: { xs: '280px', md: '320px' },
+                minHeight: { xs: '200px', md: '240px' },
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                
-                gap: '15px',
+                gap: '20px',
               }}
             >
               {/* Icon */}
@@ -184,16 +174,16 @@ function Stats() {
               sx={{
                 backgroundColor: 'white',
                 borderRadius: '8px',
-                padding: { xs: '20px', md: '25px' },
+                padding: { xs: '30px', md: '35px' },
                 textAlign: 'center',
                 boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
-                minWidth: { xs: '250px', md: '280px' },
-                minHeight: { xs: '140px', md: '160px' },
+                minWidth: { xs: '280px', md: '320px' },
+                minHeight: { xs: '200px', md: '240px' },
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '15px',
+                gap: '20px',
               }}
             >
               {/* Icon */}
@@ -247,8 +237,8 @@ function Stats() {
                 Nombre de visiteurs
               </Typography>
             </Box>
-          </Box>
-        </Container>
+        </Box>
+      </Container>
     </Box>
   );
 }

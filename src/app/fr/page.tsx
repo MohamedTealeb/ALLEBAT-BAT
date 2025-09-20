@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/hero";
 import Isolation from "@/components/sections/isolation";
+import Photo from "@/components/sections/photo";
 import Rectangle from "@/components/sections/rectangle";
 import Services from "@/components/sections/services";
 import Systems from "@/components/sections/systems";
@@ -14,6 +15,7 @@ export default function Page() {
         <Rectangle />
         <Systems />
         <Isolation />
+        <Photo />
       
       </>
     );

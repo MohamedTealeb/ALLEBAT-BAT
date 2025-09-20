@@ -1,0 +1,24 @@
+{
+  "contact": {
+    "title": "Contactez-nous",
+    "name": "Nom",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "message": "Message",
+    "submit": "Soumettre",
+    "callUs": "Appelez-nous",
+    "location": "Location",
+    "hours": "Horaire",
+    "phoneNumber": "+32 492 160 867",
+    "addressLine1": "Chaussée de Ruisbroek",
+    "addressLine2": "257, 1620 Drogenbos",
+    "workingHours1": "24 heures sur 24,",
+    "workingHours2": "du lundi au vendredi"
+  },
+  "footer": {
+    "tagline": "Élégance du design... Solidité de l'exécution",
+    "copyright": "ALLEBAT. Tous droits réservés."
+  }
+}
+

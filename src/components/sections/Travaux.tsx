@@ -157,11 +157,10 @@ function Travaux() {
             </Button>
           </Box>
 
-          {/* Two Overlay Images - Hidden on mobile for cleaner layout */}
+          {/* Two Overlay Images - Hidden on mobile */}
           {/* First image - overlapping on the left main image */}
           <Box
             sx={{
-              display: { xs: "none", md: "block" },
               position: "absolute",
               top: "450px",
               left: "270px",
@@ -169,6 +168,7 @@ function Travaux() {
               height: "420px",
               overflow: "hidden",
               zIndex: 3,
+              display: { xs: 'none', md: 'block' },
             }}
           >
             <Image
@@ -182,13 +182,13 @@ function Travaux() {
           {/* Second image - below the grid */}
           <Box
             sx={{
-              display: { xs: "none", md: "block" },
               position: "absolute",
               bottom: "-380px",
               right: "150px",
               width: "420px",
               height: "440px",
               overflow: "hidden",
+              display: { xs: 'none', md: 'block' },
             }}
           >
             <Image

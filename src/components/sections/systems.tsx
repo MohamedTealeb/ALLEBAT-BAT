@@ -23,13 +23,14 @@ function Systems() {
     <section>
       <Box
         sx={{
-          minHeight: '100vh',
+          minHeight: { xs: 'auto', md: '100vh' },
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           backgroundColor: '#ffffff',
           overflow: 'visible',
           marginTop: { xs: '60px', md: '100px' },
+          py: { xs: 4, md: 0 },
         }}
       >
         <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>

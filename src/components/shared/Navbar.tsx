@@ -28,7 +28,14 @@ const pages = [
 function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const isArabic = pathname?.startsWith('/ar') || false;
+  const [isArabic, setIsArabic] = React.useState(false);
+  const [isClient, setIsClient] = React.useState(false);
+  
+  React.useEffect(() => {
+    setIsClient(true);
+    setIsArabic(pathname?.startsWith('/ar') || false);
+  }, [pathname]);
+  
   const translations = isArabic ? arTranslations.navbar : frTranslations.navbar;
   
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -71,21 +78,21 @@ function Navbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ 
           minHeight: { xs: '60px', md: '70px' },
-          px: { xs: 2, md: 0 }
+          px: { xs: 1, md: 0 }
         }}>
           {/* Logo */}
           <Box sx={{ 
             display: 'flex', 
             alignItems: 'center', 
-            mr: { xs: 2, md: 4 },
+            mr: { xs: 1, md: 4 },
             ml: { xs: 0, md: '120px' },
             flexShrink: 0
           }}>
             <Image
               src="/logo.png"
               alt="AlleBat-Bat Logo"
-              width={100}
-              height={40}
+              width={80}
+              height={32}
               style={{ objectFit: 'contain' }}
             />
           </Box>
@@ -139,7 +146,7 @@ function Navbar() {
                     fontWeight: 800,
                     fontStyle: 'bold',
                     fontSize: '16px',
-                    direction: isArabic ? 'rtl' : 'ltr'
+                    direction: isClient && isArabic ? 'rtl' : 'ltr'
                   }}>
                     {translations[page.nameKey as keyof typeof translations]}
                   </Typography>
@@ -164,7 +171,7 @@ function Navbar() {
                   fontWeight: 'bold',
                   fontSize: '16px',
                   textTransform: 'none',
-                  direction: isArabic ? 'rtl' : 'ltr',
+                  direction: isClient && isArabic ? 'rtl' : 'ltr',
                   '&:hover': {
                     color: '#EF6C00',
                     backgroundColor: 'transparent'

@@ -26,13 +26,14 @@ function Isolation() {
     <section>
       <Box
         sx={{
-          minHeight: '120vh',
+          minHeight: { xs: 'auto', md: '120vh' },
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           backgroundColor: '#BEBEBE',
           overflow: 'visible',
           marginTop: { xs: '60px', md: '170px' },
+          py: { xs: 4, md: 0 },
         }}
       >
         <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
@@ -151,15 +152,15 @@ function Isolation() {
 
              </Box>
 
-            {/* Secondary Image - Center of Page - Hidden on mobile */}
+            {/* Secondary Image - Center of Page */}
             <Box
               sx={{
-                display: { xs: 'none', md: 'block' },
                 position: 'absolute',
                 left: '50%',
                 top: '50%',
                 transform: 'translate(-50%, -50%)',
                 zIndex: 7,
+                display: { xs: 'none', md: 'block' },
               }}
             >
               <Box

@@ -243,7 +243,7 @@ function Contact() {
           />
         </Box>
 
-        {/* Bottom Info Bar */}
+        {/* Bottom Info Bar - Simplified on small screens */}
         <Paper
           sx={{
             mt: 6,
@@ -259,6 +259,7 @@ function Contact() {
             marginRight: { xs: 'auto', md: 0 },
             mx: { xs: 'auto', md: 0 },
             gap: { xs: 2, md: 3 },
+            flexDirection: { xs: 'column', sm: 'column', md: 'row' },
           }}
         >
           {/* Phone */}

@@ -19,7 +19,7 @@ function Stats() {
       <Box
         sx={{
           width: '100%',
-          height: { xs: '400px', md: '600px' },
+          height: '600px',
           backgroundImage: 'url("/Rectangle 3364.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',

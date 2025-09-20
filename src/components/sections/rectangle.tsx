@@ -24,13 +24,14 @@ function Rectangle() {
     <section>
       <Box
         sx={{
-          minHeight: '100vh',
+          minHeight: { xs: 'auto', md: '100vh' },
           display: 'flex',
           alignItems: 'center',
           position: 'relative',
           backgroundColor: '#BEBEBE',
           overflow: 'visible',
           marginTop: { xs: '60px', md: '370px' },
+          py: { xs: 4, md: 0 },
         }}
       >
 
@@ -75,7 +76,6 @@ function Rectangle() {
                 src="/Rectangle 3359.png"
                 alt="Design decoration"
                 sx={{
-                  display: { xs: 'none', md: 'block' },
                   position: 'absolute',
                   width: '1900px',
                   height: '200px',
@@ -83,6 +83,7 @@ function Rectangle() {
                   left: '390px',
                   objectFit: 'fill',
                   transform: 'scaleX(1.5)',
+                  display: { xs: 'none', md: 'block' },
                 }}
               />
 
@@ -92,12 +93,12 @@ function Rectangle() {
                  src="/Group 5521.png"
                  alt="Orange circle decoration"
                  sx={{
-                   display: { xs: 'none', md: 'block' },
                    position: 'absolute',
                    width: '200px',
                    height: 'auto',
                    top: '-70px',
                    left: '580px',
+                   display: { xs: 'none', md: 'block' },
                  }}
                />
 
@@ -107,13 +108,13 @@ function Rectangle() {
                  src="/Group 5522.png"
                  alt="Group decoration"
                  sx={{
-                   display: { xs: 'none', md: 'block' },
                    position: 'absolute',
                    width: '280px',
                    height: 'auto',
                    top: '150px',
                    right: '265px',
                    marginTop: '270px',
+                   display: { xs: 'none', md: 'block' },
                  }}
                />
              </Box>

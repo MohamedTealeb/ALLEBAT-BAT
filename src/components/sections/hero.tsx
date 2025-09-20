@@ -37,7 +37,7 @@ function Hero() {
             {/* Content Card */}
             <Box
               sx={{
-                backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
                 backdropFilter: 'blur(15px)',
                 borderRadius: '20px',
                 padding: '40px',

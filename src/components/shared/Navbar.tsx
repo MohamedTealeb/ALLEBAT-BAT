@@ -77,7 +77,7 @@ function Navbar() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ 
-          minHeight: { xs: '60px', md: '70px' },
+          minHeight: { xs: '50px', md: '70px' },
           px: { xs: 1, md: 0 }
         }}>
           {/* Logo */}
@@ -86,28 +86,49 @@ function Navbar() {
             alignItems: 'center', 
             mr: { xs: 1, md: 4 },
             ml: { xs: 0, md: '120px' },
-            flexShrink: 0
+            flexShrink: 0,
+            width: { xs: '80px', md: '100px' },
+            height: { xs: '42px', md: '60px' }
           }}>
             <Image
               src="/logo.png"
               alt="AlleBat-Bat Logo"
-              width={80}
-              height={32}
-              style={{ objectFit: 'contain' }}
+              width={100}
+              height={40}
+              style={{ 
+                objectFit: 'contain',
+                width: '100%',
+                height: '100%'
+              }}
             />
           </Box>
 
-          {/* Menu for mobile */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          {/* Language Toggle - Center on mobile */}
+          <Box sx={{ 
+            flexGrow: 1,
+            display: { xs: "flex", md: "none" },
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <ClientOnlyLanguageToggle 
+              onLanguageChange={handleLanguageChange}
+            />
+          </Box>
+
+          {/* Menu for mobile - Right side */}
+          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
             <IconButton
-              size="large"
+              size="small"
               aria-label="navigation menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              sx={{ color: '#333' }}
+              sx={{ 
+                color: '#333',
+                p: { xs: 1, md: 1.5 }
+              }}
             >
-              <MenuIcon />
+              <MenuIcon sx={{ fontSize: { xs: '20px', md: '24px' } }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -126,7 +147,7 @@ function Navbar() {
               sx={{ 
                 display: { xs: "block", md: "none" },
                 '& .MuiPaper-root': {
-                  minWidth: '200px',
+                  minWidth: { xs: '180px', md: '200px' },
                   mt: 1
                 }
               }}
@@ -136,16 +157,16 @@ function Navbar() {
                   key={page.name} 
                   onClick={() => handleScrollToSection(page.id)}
                   sx={{
-                    py: 2,
-                    px: 3,
-                    minHeight: '48px'
+                    py: { xs: 1.5, md: 2 },
+                    px: { xs: 2, md: 3 },
+                    minHeight: { xs: '40px', md: '48px' }
                   }}
                 >
                   <Typography sx={{ 
                     color: '#000', 
                     fontWeight: 800,
                     fontStyle: 'bold',
-                    fontSize: '16px',
+                    fontSize: { xs: '14px', md: '16px' },
                     direction: isClient && isArabic ? 'rtl' : 'ltr'
                   }}>
                     {translations[page.nameKey as keyof typeof translations]}
@@ -183,10 +204,10 @@ function Navbar() {
             ))}
           </Box>
 
-          {/* Language Toggle */}
+          {/* Language Toggle - Desktop only */}
           <Box sx={{ 
             flexGrow: 0,
-            ml: { xs: 'auto', md: 0 }
+            display: { xs: 'none', md: 'block' }
           }}>
             <ClientOnlyLanguageToggle 
               onLanguageChange={handleLanguageChange}

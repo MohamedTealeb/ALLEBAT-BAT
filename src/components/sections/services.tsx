@@ -3,6 +3,7 @@
 import { Box, Typography, Container, Card, CardContent } from '@mui/material';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState, useRef } from 'react';
 import arTranslations from '@/translation/ar.json';
 import frTranslations from '@/translation/fr.json';
 
@@ -10,6 +11,34 @@ function Services() {
   const pathname = usePathname();
   const isArabic = pathname?.startsWith('/ar');
   const translations = isArabic ? arTranslations.services : frTranslations.services;
+  const [isVisible, setIsVisible] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // تشغيل انيمشن العنوان أولاً
+          setIsVisible(true);
+          
+          // تشغيل انيمشن الكروت تدريجياً
+          services.forEach((_, index) => {
+            setTimeout(() => {
+              setVisibleCards(prev => [...prev, index]);
+            }, 200 + (index * 150)); // تأخير تدريجي لكل كارت
+          });
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   
   const services = [
     {
@@ -41,6 +70,7 @@ function Services() {
   return (
     <Box
       id="services"
+      ref={sectionRef}
       sx={{
         backgroundColor: '#f8f9fa',
         padding: { xs: '60px 0', md: '80px 0' },
@@ -57,6 +87,10 @@ function Services() {
             color: '#333',
             marginBottom: '60px',
             direction: isArabic ? 'rtl' : 'ltr',
+            // انيمشن العنوان من الأعلى
+            transform: isVisible ? 'translateY(0)' : 'translateY(-50px)',
+            opacity: isVisible ? 1 : 0,
+            transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
           {translations.title}
@@ -70,20 +104,23 @@ function Services() {
             gap: 4,
           }}
         >
-          {services.map((service) => (
+          {services.map((service, index) => (
             <Box key={service.id}>
               <Card
                 sx={{
                   height: '100%',
                   borderRadius: '8px',
                   boxShadow: '0 4px 15px rgba(0, 0, 0, 0.08)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                   border: 'none',
                   borderTop: '4px solid #EF6C00',
                   overflow: 'hidden',
+                  // انيمشن الكروت من الأعلى
+                  transform: visibleCards.includes(index) ? 'translateY(0)' : 'translateY(-80px)',
+                  opacity: visibleCards.includes(index) ? 1 : 0,
                   '&:hover': {
-                    transform: 'translateY(-3px)',
-                    boxShadow: '0 8px 25px rgba(0, 0, 0, 0.12)',
+                    transform: visibleCards.includes(index) ? 'translateY(-8px) scale(1.03)' : 'translateY(-80px)',
+                    boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)',
                   },
                 }}
               >

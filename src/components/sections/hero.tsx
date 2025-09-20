@@ -2,6 +2,7 @@
 'use client'
 import { Box, Typography, Button, Container } from '@mui/material';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import arTranslations from '@/translation/ar.json';
 import frTranslations from '@/translation/fr.json';
 
@@ -9,6 +10,16 @@ function Hero() {
   const pathname = usePathname();
   const isArabic = pathname?.startsWith('/ar');
   const translations = isArabic ? arTranslations.hero : frTranslations.hero;
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    // تشغيل الانيمشن بعد تحميل الكومبوننت
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
   
   const handleScrollToContact = () => {
     const element = document.getElementById('contact');
@@ -70,6 +81,15 @@ function Hero() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
+                // إضافة انيمشن القدوم من اليمين
+                transform: isVisible ? 'translateX(0)' : 'translateX(100px)',
+                opacity: isVisible ? 1 : 0,
+                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                // إضافة تأثير hover للكارت
+                '&:hover': {
+                  transform: isVisible ? 'translateX(0) scale(1.02)' : 'translateX(100px)',
+                  boxShadow: '0 25px 50px rgba(0, 0, 0, 0.15)',
+                },
               }}
             >
               {/* Title */}

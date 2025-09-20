@@ -2,6 +2,7 @@
 import { Box, Typography, Container, Button } from "@mui/material";
 import Image from "next/image";
 import { usePathname } from 'next/navigation';
+import { useEffect, useState, useRef } from 'react';
 import arTranslations from '@/translation/ar.json';
 import frTranslations from '@/translation/fr.json';
 
@@ -9,6 +10,39 @@ function Travaux() {
   const pathname = usePathname();
   const isArabic = pathname?.startsWith('/ar');
   const translations = isArabic ? arTranslations.travaux : frTranslations.travaux;
+  const [isVisible, setIsVisible] = useState(false);
+  const [leftImageVisible, setLeftImageVisible] = useState(false);
+  const [rightImageVisible, setRightImageVisible] = useState(false);
+  const [cardVisible, setCardVisible] = useState(false);
+  const [overlayImagesVisible, setOverlayImagesVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // تشغيل انيمشن الصور الرئيسية أولاً
+          setTimeout(() => setLeftImageVisible(true), 200);
+          setTimeout(() => setRightImageVisible(true), 400);
+          
+          // ثم الكارت من الأعلى
+          setTimeout(() => setCardVisible(true), 600);
+          
+          // أخيراً الصور الإضافية
+          setTimeout(() => setOverlayImagesVisible(true), 800);
+          
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   
   const handleScrollToContact = () => {
     const element = document.getElementById('contact');
@@ -23,6 +57,7 @@ function Travaux() {
   return (
     <Box
       id="travaux"
+      ref={sectionRef}
       sx={{
         backgroundColor: "#f8f9fa",
         padding: { xs: "100px 0 60px 0", md: "190px 0 80px 0" },
@@ -54,6 +89,10 @@ function Travaux() {
                 height: "100%",
                 minHeight: { xs: "300px", md: "500px" },
                 position: "relative",
+                // انيمشن الصورة الشمال من الشمال
+                transform: leftImageVisible ? 'translateX(0)' : 'translateX(-100px)',
+                opacity: leftImageVisible ? 1 : 0,
+                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
             >
               <Image
@@ -72,6 +111,10 @@ function Travaux() {
                 height: "100%",
                 minHeight: { xs: "300px", md: "500px" },
                 position: "relative",
+                // انيمشن الصورة اليمين من اليمين
+                transform: rightImageVisible ? 'translateX(0)' : 'translateX(100px)',
+                opacity: rightImageVisible ? 1 : 0,
+                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
             >
               <Image
@@ -89,7 +132,10 @@ function Travaux() {
               position: { xs: "relative", md: "absolute" },
               bottom: { xs: "auto", md: "390px" },
               left: { xs: "auto", md: "50%" },
-              transform: { xs: "none", md: "translateX(-50%)" },
+              transform: { 
+                xs: cardVisible ? "none" : "translateY(-50px)", 
+                md: cardVisible ? "translateX(-50%)" : "translateX(-50%) translateY(-50px)" 
+              },
               backgroundColor: "rgba(255, 255, 255, 0.95)",
               backdropFilter: "blur(15px)",
               borderRadius: "20px",
@@ -102,6 +148,9 @@ function Travaux() {
               zIndex: 2,
               mx: { xs: "auto", md: 0 },
               mt: { xs: 3, md: 0 },
+              // انيمشن الكارت من الأعلى
+              opacity: cardVisible ? 1 : 0,
+              transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
             <Typography
@@ -169,6 +218,10 @@ function Travaux() {
               overflow: "hidden",
               zIndex: 3,
               display: { xs: 'none', md: 'block' },
+              // انيمشن الصورة الإضافية من الشمال
+              transform: overlayImagesVisible ? 'translateX(0) scale(1)' : 'translateX(-80px) scale(0.8)',
+              opacity: overlayImagesVisible ? 1 : 0,
+              transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
             <Image
@@ -189,6 +242,10 @@ function Travaux() {
               height: "440px",
               overflow: "hidden",
               display: { xs: 'none', md: 'block' },
+              // انيمشن الصورة الإضافية من اليمين
+              transform: overlayImagesVisible ? 'translateX(0) scale(1)' : 'translateX(80px) scale(0.8)',
+              opacity: overlayImagesVisible ? 1 : 0,
+              transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s', // تأخير قليل
             }}
           >
             <Image

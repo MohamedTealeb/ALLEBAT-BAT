@@ -46,6 +46,7 @@ function Contact() {
 
   return (
     <Box
+      id="contact"
       sx={{
         backgroundColor: '#F5F5F5',
         py: { xs: 6, md: 10 },

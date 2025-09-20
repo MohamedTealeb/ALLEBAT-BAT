@@ -40,6 +40,7 @@ function Photo() {
 
   return (
     <Box
+      id="photos"
       sx={{
         backgroundColor: '#BEBEBE',
         paddingY: { xs: '60px', md: '80px' },

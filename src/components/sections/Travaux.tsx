@@ -4,6 +4,7 @@ import Image from "next/image";
 function Travaux() {
   return (
     <Box
+      id="travaux"
       sx={{
         backgroundColor: "#f8f9fa",
         padding: { xs: "100px 0 60px 0", md: "190px 0 80px 0" },

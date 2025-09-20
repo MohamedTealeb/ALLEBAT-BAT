@@ -15,7 +15,12 @@ import Image from "next/image";
 import ClientOnlyLanguageToggle from "./ClientOnlyLanguageToggle";
 import { useRouter } from "next/navigation";
 
-const pages: string[] = ["Services", "À propos", "Nos Photos", "Contact"];
+const pages = [
+  { name: "Services", id: "services" },
+  { name: "À propos", id: "travaux" },
+  { name: "Nos Photos", id: "photos" },
+  { name: "Contact", id: "contact" }
+];
 
 function Navbar() {
   const router = useRouter();
@@ -29,6 +34,17 @@ function Navbar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleScrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    handleCloseNavMenu();
   };
 
   const handleLanguageChange = (language: 'french' | 'arabic') => {
@@ -87,8 +103,8 @@ function Navbar() {
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ color: '#000', fontWeight: 800,fontStyle: 'bold' }}>{page}</Typography>
+                <MenuItem key={page.name} onClick={() => handleScrollToSection(page.id)}>
+                  <Typography sx={{ color: '#000', fontWeight: 800,fontStyle: 'bold' }}>{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -103,8 +119,8 @@ function Navbar() {
           }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.name}
+                onClick={() => handleScrollToSection(page.id)}
                 sx={{ 
                   color: '#000',
                   fontWeight: 'bold',
@@ -116,7 +132,7 @@ function Navbar() {
                   }
                 }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>

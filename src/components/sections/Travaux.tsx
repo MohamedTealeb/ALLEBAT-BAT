@@ -1,7 +1,25 @@
+'use client'
 import { Box, Typography, Container, Button } from "@mui/material";
 import Image from "next/image";
+import { usePathname } from 'next/navigation';
+import arTranslations from '@/translation/ar.json';
+import frTranslations from '@/translation/fr.json';
 
 function Travaux() {
+  const pathname = usePathname();
+  const isArabic = pathname?.startsWith('/ar');
+  const translations = isArabic ? arTranslations.travaux : frTranslations.travaux;
+  
+  const handleScrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   return (
     <Box
       id="travaux"
@@ -68,10 +86,10 @@ function Travaux() {
           {/* Content Overlay */}
           <Box
             sx={{
-              position: "absolute",
-              bottom: "390px",
-              left: "50%",
-              transform: "translateX(-50%)",
+              position: { xs: "relative", md: "absolute" },
+              bottom: { xs: "auto", md: "390px" },
+              left: { xs: "auto", md: "50%" },
+              transform: { xs: "none", md: "translateX(-50%)" },
               backgroundColor: "rgba(255, 255, 255, 0.95)",
               backdropFilter: "blur(15px)",
               borderRadius: "20px",
@@ -82,6 +100,8 @@ function Travaux() {
               width: "90%",
               textAlign: "left",
               zIndex: 2,
+              mx: { xs: "auto", md: 0 },
+              mt: { xs: 3, md: 0 },
             }}
           >
             <Typography
@@ -92,9 +112,11 @@ function Travaux() {
                 color: "#333",
                 marginBottom: "20px",
                 lineHeight: 1.2,
+                direction: isArabic ? 'rtl' : 'ltr',
+                textAlign: isArabic ? 'right' : 'left',
               }}
             >
-              Travaux de construction et de démolition
+              {translations.title}
             </Typography>
 
             <Typography
@@ -104,19 +126,16 @@ function Travaux() {
                 lineHeight: 1.6,
                 color: "#666",
                 marginBottom: "30px",
+                direction: isArabic ? 'rtl' : 'ltr',
+                textAlign: isArabic ? 'right' : 'left',
               }}
             >
-              Nous transformons votre vision en réalité avec des projets de
-              construction et de démolition haut de gamme. Nous proposons la
-              construction neuve, la démolition sécurisée, la rénovation et les
-              finitions de base selon les plus hauts standards de qualité et de
-              sécurité. Nous garantissons des bâtiments solides, durables, avec
-              des designs raffinés qui reflètent l&apos;élégance et le prestige dans
-              chaque détail.
+              {translations.description}
             </Typography>
 
             <Button
               variant="contained"
+              onClick={handleScrollToContact}
               sx={{
                 backgroundColor: "#EF6C00",
                 color: "white",
@@ -134,19 +153,20 @@ function Travaux() {
                 transition: "all 0.3s ease",
               }}
             >
-              Contactez-nous
+              {translations.contactButton}
             </Button>
           </Box>
 
-          {/* Two Overlay Images */}
+          {/* Two Overlay Images - Hidden on mobile for cleaner layout */}
           {/* First image - overlapping on the left main image */}
           <Box
             sx={{
+              display: { xs: "none", md: "block" },
               position: "absolute",
               top: "450px",
               left: "270px",
-              width: { xs: "200px", md: "580px" },
-              height: { xs: "180px", md: "420px" },
+              width: "580px",
+              height: "420px",
               overflow: "hidden",
               zIndex: 3,
             }}
@@ -162,14 +182,13 @@ function Travaux() {
           {/* Second image - below the grid */}
           <Box
             sx={{
+              display: { xs: "none", md: "block" },
               position: "absolute",
-              
               bottom: "-380px",
               right: "150px",
-              width: { xs: "250px", md: "420px" },
-              height: { xs: "200px", md: "440px" },
+              width: "420px",
+              height: "440px",
               overflow: "hidden",
-             
             }}
           >
             <Image

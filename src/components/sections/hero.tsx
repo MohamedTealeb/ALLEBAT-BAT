@@ -1,7 +1,25 @@
 
+'use client'
 import { Box, Typography, Button, Container } from '@mui/material';
+import { usePathname } from 'next/navigation';
+import arTranslations from '@/translation/ar.json';
+import frTranslations from '@/translation/fr.json';
 
 function Hero() {
+  const pathname = usePathname();
+  const isArabic = pathname?.startsWith('/ar');
+  const translations = isArabic ? arTranslations.hero : frTranslations.hero;
+  
+  const handleScrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   return (
     <section>
       <Box
@@ -29,9 +47,10 @@ function Hero() {
           <Box
             sx={{
               display: 'flex',
-              justifyContent: 'flex-end',
+              justifyContent: { xs: 'center', md: 'flex-end' },
               alignItems: 'center',
               minHeight: '80vh',
+              px: { xs: 2, md: 0 },
             }}
           >
             {/* Content Card */}
@@ -40,13 +59,14 @@ function Hero() {
                 backgroundColor: 'rgba(255, 255, 255, 0.5)',
                 backdropFilter: 'blur(15px)',
                 borderRadius: '20px',
-                padding: '40px',
-                maxWidth: '400px',
+                padding: { xs: '30px', md: '40px' },
+                maxWidth: { xs: '350px', md: '400px' },
                 width: '100%',
                 marginRight: { md: '50px', xs: '0' },
+                marginX: { xs: 'auto', md: '0' },
                 boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
-                minHeight: '500px',
+                minHeight: { xs: '400px', md: '500px' },
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -61,10 +81,11 @@ function Hero() {
                   color: '#333',
                   marginBottom: '20px',
                   lineHeight: 1.2,
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  textAlign: isArabic ? 'right' : 'left',
                 }}
               >
-                Création &<br />
-                Rénovation
+                {translations.title}
               </Typography>
 
               {/* Description */}
@@ -75,15 +96,18 @@ function Hero() {
                   lineHeight: 1.6,
                   color: '#666',
                   marginBottom: '30px',
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  textAlign: isArabic ? 'right' : 'left',
                 }}
               >
-                Nous créons et rénovons des espaces avec un esprit moderne, en soignant chaque détail. Nous garantissons solidité, sécurité et design raffiné, avec des solutions durables qui préservent la qualité et l&apos;élégance de vos lieux.
+                {translations.description}
               </Typography>
 
               {/* Contact Button */}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+              <Box sx={{ display: 'flex', justifyContent: isArabic ? 'flex-end' : 'flex-start' }}>
                 <Button
                   variant="contained"
+                  onClick={handleScrollToContact}
                   sx={{
                     backgroundColor: '#EF6C00',
                     color: 'white',
@@ -102,7 +126,7 @@ function Hero() {
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  Contactez-nous
+                  {translations.contactButton}
                 </Button>
               </Box>
             </Box>

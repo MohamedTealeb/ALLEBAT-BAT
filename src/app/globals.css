@@ -9,4 +9,25 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: var(--color-light);
   color: var(--color-dark);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent text overflow */
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .MuiContainer-root {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
 }

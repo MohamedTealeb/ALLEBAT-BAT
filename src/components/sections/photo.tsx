@@ -2,8 +2,15 @@
 import { Box, Typography, Container, IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import arTranslations from '@/translation/ar.json';
+import frTranslations from '@/translation/fr.json';
 
 function Photo() {
+  const pathname = usePathname();
+  const isArabic = pathname?.startsWith('/ar');
+  const translations = isArabic ? arTranslations.photos : frTranslations.photos;
+  
   const photos = [
     '/Rectangle 58.png',
     '/Rectangle 59.png', 
@@ -22,7 +29,7 @@ function Photo() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const photosPerView = 4;
+  const photosPerView = 4; // Fixed for desktop, CSS will handle responsive behavior
 
   const nextPhotos = () => {
     setCurrentIndex((prevIndex) => 
@@ -56,9 +63,10 @@ function Photo() {
             fontSize: { xs: '2rem', md: '2.5rem' },
             color: '#333',
             marginBottom: { xs: '40px', md: '60px' },
+            direction: isArabic ? 'rtl' : 'ltr',
           }}
         >
-          Nos Photos
+          {translations.title}
         </Typography>
 
         {/* Photos Gallery with Navigation */}
@@ -92,11 +100,15 @@ function Photo() {
           {/* Photos Container */}
           <Box
             sx={{
-              display: 'flex',
-              gap: { xs: '5px', md: '15px' },
+              display: 'grid',
+              gridTemplateColumns: {
+                xs: 'repeat(2, 1fr)', // Mobile: 2 photos
+                sm: 'repeat(3, 1fr)',  // Tablet: 3 photos
+                md: 'repeat(4, 1fr)'   // Desktop: 4 photos
+              },
+              gap: { xs: '8px', md: '15px' },
               justifyContent: 'center',
               alignItems: 'center',
-              overflow: 'hidden',
               flex: 1,
               maxWidth: { xs: '320px', sm: '600px', md: '1200px' },
             }}
@@ -108,8 +120,8 @@ function Photo() {
                 src={photo}
                 alt={`Photo ${currentIndex + index + 1}`}
                 sx={{
-                  width: { xs: '80px', sm: '150px', md: '280px' },
-                  height: { xs: '80px', sm: '150px', md: '320px' },
+                  width: '100%',
+                  height: { xs: '120px', sm: '150px', md: '280px' },
                   objectFit: 'cover',
                   borderRadius: '12px',
                   boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',

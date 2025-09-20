@@ -1,32 +1,40 @@
 
+'use client'
 import { Box, Typography, Container, Card, CardContent } from '@mui/material';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import arTranslations from '@/translation/ar.json';
+import frTranslations from '@/translation/fr.json';
 
 function Services() {
+  const pathname = usePathname();
+  const isArabic = pathname?.startsWith('/ar');
+  const translations = isArabic ? arTranslations.services : frTranslations.services;
+  
   const services = [
     {
       id: 1,
       image: '/1.png',
-      title: 'Travaux de construction et de démolition',
-      description: 'Construction neuve, démolition de bâtiments, rénovation complète, gros œuvre et second œuvre.'
+      title: translations.service1.title,
+      description: translations.service1.description
     },
     {
       id: 2,
       image: '/2.png',
-      title: 'Finitions intérieures et extérieures',
-      description: 'Pose de carrelage, travaux de peinture, parements en plâtre, décoration intérieure et finitions.'
+      title: translations.service2.title,
+      description: translations.service2.description
     },
     {
       id: 3,
       image: '/3.png',
-      title: 'Installations et systèmes techniques',
-      description: 'Électricité, gaz, chauffage central, plomberie, installations d\'eau, et systèmes de ventilation.'
+      title: translations.service3.title,
+      description: translations.service3.description
     },
     {
       id: 4,
       image: '/4.png',
-      title: 'Isolation et entretien des bâtiments',
-      description: 'Isolation thermique et acoustique, toitures et des murs, traitement de l\'humidité, entretien global des immeubles.'
+      title: translations.service4.title,
+      description: translations.service4.description
     }
   ];
 
@@ -48,9 +56,10 @@ function Services() {
             fontSize: { xs: '2rem', md: '2.5rem' },
             color: '#333',
             marginBottom: '60px',
+            direction: isArabic ? 'rtl' : 'ltr',
           }}
         >
-          Nos Services
+          {translations.title}
         </Typography>
 
         {/* Services Grid */}
@@ -121,6 +130,8 @@ function Services() {
                       marginBottom: '12px',
                       lineHeight: 1.3,
                       minHeight: '40px',
+                      direction: isArabic ? 'rtl' : 'ltr',
+                      textAlign: 'center',
                     }}
                   >
                     {service.title}
@@ -135,6 +146,7 @@ function Services() {
                       lineHeight: 1.5,
                       flexGrow: 1,
                       textAlign: 'center',
+                      direction: isArabic ? 'rtl' : 'ltr',
                     }}
                   >
                     {service.description}

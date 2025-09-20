@@ -1,6 +1,24 @@
+'use client'
 import { Box, Typography, Button, Container } from '@mui/material';
+import { usePathname } from 'next/navigation';
+import arTranslations from '@/translation/ar.json';
+import frTranslations from '@/translation/fr.json';
 
 function Systems() {
+  const pathname = usePathname();
+  const isArabic = pathname?.startsWith('/ar');
+  const translations = isArabic ? arTranslations.systems : frTranslations.systems;
+  
+  const handleScrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   return (
     <section>
       <Box
@@ -72,7 +90,7 @@ function Systems() {
                   lineHeight: 1.2,
                 }}
               >
-                Installations et systèmes techniques
+                {translations.title}
               </Typography>
 
               {/* Description */}
@@ -86,13 +104,14 @@ function Systems() {
                   textAlign: 'left',
                 }}
               >
-                Nous assurons l&apos;efficacité et la sécurité de tous les systèmes des bâtiments grâce à des solutions pour l&apos;électricité, le gaz, le chauffage central, la plomberie et la maintenance générale. Nous nous concentrons sur chaque détail pour garantir la continuité et la performance optimale des installations, offrant des espaces fonctionnels, sûrs et technologiquement avancés.
+                {translations.description}
               </Typography>
 
               {/* Contact Button */}
               <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <Button
                   variant="contained"
+                  onClick={handleScrollToContact}
                   sx={{
                     backgroundColor: '#FF9800',
                     color: 'white',
@@ -110,7 +129,7 @@ function Systems() {
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  Contactez-nous
+                  {translations.contactButton}
                 </Button>
               </Box>
             </Box>

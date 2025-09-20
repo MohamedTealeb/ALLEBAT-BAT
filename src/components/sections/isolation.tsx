@@ -1,9 +1,27 @@
 
 
+'use client'
 import { Box, Typography, Button, Container } from '@mui/material';
+import { usePathname } from 'next/navigation';
+import arTranslations from '@/translation/ar.json';
+import frTranslations from '@/translation/fr.json';
 import Stats from './stats';
 
 function Isolation() {
+  const pathname = usePathname();
+  const isArabic = pathname?.startsWith('/ar');
+  const translations = isArabic ? arTranslations.isolation : frTranslations.isolation;
+  
+  const handleScrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   return (
     <section>
       <Box
@@ -33,17 +51,21 @@ function Isolation() {
             {/* Content Card - Left Side */}
             <Box
   sx={{
-    position: 'absolute',
-    top: { xs: '100px', md: '40px' },   // مكان الكارت من فوق
-    left: { xs: '50%', md: '80px' },     // مكان الكارت من الشمال
-    transform: { xs: 'translateX(-50%)', md: 'none' }, // في الموبايل يبقى في النص
-    width: { xs: '90%', md: '400px' },   // أوسع شوية
-    height: { xs: '400px', md: '600px' },
+    position: { xs: 'relative', md: 'absolute' },
+    top: { xs: 'auto', md: '40px' },
+    left: { xs: 'auto', md: '80px' },
+    transform: { xs: 'none', md: 'none' },
+    width: { xs: '100%', md: '400px' },
+    maxWidth: { xs: '400px', md: '400px' },
+    height: 'auto',
+    minHeight: { xs: 'auto', md: '600px' },
     backgroundColor: 'white',
-    padding: { xs: '20px', md: '30px' }, // padding أقل عشان الطول يقل
+    padding: { xs: '30px', md: '30px' },
     zIndex: 10,
     boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
     borderRadius: '12px',
+    mx: { xs: 'auto', md: 0 },
+    mb: { xs: 4, md: 0 },
   }}
 >
   {/* Title */}
@@ -57,7 +79,7 @@ function Isolation() {
       lineHeight: 1.2,
     }}
   >
-    Isolation et entretien des bâtiments
+    {translations.title}
   </Typography>
 
   {/* Description */}
@@ -72,12 +94,13 @@ function Isolation() {
       letterSpacing: '0.3px', // مسافة بين الحروف للوضوح
     }}
   >
-   Nous protégeons vos bâtiments avec des solutions d’isolation thermique et acoustique, de traitement de l’humidité et de maintenance complète. Nous offrons une protection durable et une qualité élevée pour assurer un environnement sain, sûr et esthétique pour les occupants, tout en préservant l’élégance et la valeur architecturale du bâtiment pendant de nombreuses années
+   {translations.description}
   </Typography>
 
   {/* Contact Button */}
   <Button
     variant="contained"
+    onClick={handleScrollToContact}
     sx={{
       backgroundColor: '#FF9800',
       color: 'white',
@@ -95,20 +118,20 @@ function Isolation() {
       transition: 'all 0.3s ease',
     }}
   >
-    Contactez-nous
+    {translations.contactButton}
   </Button>
 </Box>
              {/* Image Section - Far Right Side */}
              <Box
                sx={{
-                 position: 'relative',
+                 position: { xs: 'relative', md: 'relative' },
                  width: { xs: '100%', md: '440px' },
-                 height: { xs: '400px', md: '900px' },
+                 height: { xs: '300px', md: '900px' },
                  display: 'flex',
                  alignItems: 'flex-start',
-                 justifyContent: 'flex-end',
-                 marginTop: { md: '-300px' },
-                 marginLeft: { md: '504px' },
+                 justifyContent: { xs: 'center', md: 'flex-end' },
+                 marginTop: { xs: 0, md: '-300px' },
+                 marginLeft: { xs: 0, md: '504px' },
                }}
              >
                {/* Main Isolation Image - Far Right */}
@@ -121,21 +144,22 @@ function Isolation() {
                    height: '100%',
                    objectFit: 'cover',
                    zIndex: 5,
-                   marginLeft: { md: '30px' },
+                   marginLeft: { xs: 0, md: '30px' },
+                   borderRadius: { xs: '12px', md: 0 },
                  }}
                />
 
              </Box>
 
-            {/* Secondary Image - Center of Page */}
+            {/* Secondary Image - Center of Page - Hidden on mobile */}
             <Box
               sx={{
+                display: { xs: 'none', md: 'block' },
                 position: 'absolute',
                 left: '50%',
                 top: '50%',
                 transform: 'translate(-50%, -50%)',
                 zIndex: 7,
-             
               }}
             >
               <Box
@@ -143,12 +167,10 @@ function Isolation() {
                 src="/Rectangle 3362.png"
                 alt="Building maintenance"
                 sx={{
-                  width: { xs: '180px', md: '1280px' },
-                  height: { xs: '180px', md: '580px' },
-                  marginBottom: { xs: '100px', md: '400px' },
+                  width: '1280px',
+                  height: '580px',
+                  marginBottom: '400px',
                   objectFit: 'cover',
-                  
-                
                 }}
               />
             </Box>

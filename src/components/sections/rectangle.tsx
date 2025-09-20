@@ -1,7 +1,25 @@
 
+'use client'
 import { Box, Typography, Button, Container } from '@mui/material';
+import { usePathname } from 'next/navigation';
+import arTranslations from '@/translation/ar.json';
+import frTranslations from '@/translation/fr.json';
 
 function Rectangle() {
+  const pathname = usePathname();
+  const isArabic = pathname?.startsWith('/ar');
+  const translations = isArabic ? arTranslations.finitions : frTranslations.finitions;
+  
+  const handleScrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   return (
     <section>
       <Box
@@ -51,50 +69,51 @@ function Rectangle() {
                  }}
                />
                
-               {/* Small Image Below - positioned absolute */}
-                 <Box
-                 component="img"
-                 src="/Rectangle 3359.png"
-                 alt="Design decoration"
-                 sx={{
-                   position: 'absolute',
-                   width: { xs: '900px', md: '1900px' },
-                   height: { xs: '300px', md: '200px' },
-                   top: { xs: '420px', md: '420px' },
-                   left: { xs: '10px', md: '390px' },
-                   objectFit: 'fill',
-                   transform: 'scaleX(1.5)',
-                 }}
-               />
+               {/* Small Image Below - positioned absolute - Hidden on mobile */}
+                <Box
+                component="img"
+                src="/Rectangle 3359.png"
+                alt="Design decoration"
+                sx={{
+                  display: { xs: 'none', md: 'block' },
+                  position: 'absolute',
+                  width: '1900px',
+                  height: '200px',
+                  top: '420px',
+                  left: '390px',
+                  objectFit: 'fill',
+                  transform: 'scaleX(1.5)',
+                }}
+              />
 
-               {/* Orange Circle Image - positioned above card right */}
+               {/* Orange Circle Image - positioned above card right - Hidden on mobile */}
                <Box
                  component="img"
                  src="/Group 5521.png"
                  alt="Orange circle decoration"
                  sx={{
+                   display: { xs: 'none', md: 'block' },
                    position: 'absolute',
-                   width: { xs: '150px', md: '200px' },
+                   width: '200px',
                    height: 'auto',
-                   top: { xs: '20px', md: '-70px' },
-                   left: { xs: '20px', md: '580px' },
-                   
+                   top: '-70px',
+                   left: '580px',
                  }}
                />
 
-               {/* Group 5522 Image - positioned absolute */}
+               {/* Group 5522 Image - positioned absolute - Hidden on mobile */}
                <Box
                  component="img"
                  src="/Group 5522.png"
                  alt="Group decoration"
                  sx={{
+                   display: { xs: 'none', md: 'block' },
                    position: 'absolute',
-                   width: { xs: '200px', md: '280px' },
+                   width: '280px',
                    height: 'auto',
-                   top: { xs: '100px', md: '150px' },
-                   right: { xs: '20px', md: '265px' },
-                   marginTop: { xs: '100px', md: '270px' },
-              
+                   top: '150px',
+                   right: '265px',
+                   marginTop: '270px',
                  }}
                />
              </Box>
@@ -123,9 +142,11 @@ function Rectangle() {
                   color: '#333',
                   marginBottom: '20px',
                   lineHeight: 1.2,
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  textAlign: isArabic ? 'right' : 'left',
                 }}
               >
-                Finitions intérieures et extérieures
+                {translations.title}
               </Typography>
 
               {/* Description */}
@@ -136,16 +157,18 @@ function Rectangle() {
                   lineHeight: 1.6,
                   color: '#555',
                   marginBottom: '30px',
-                  textAlign: 'left',
+                  direction: isArabic ? 'rtl' : 'ltr',
+                  textAlign: isArabic ? 'right' : 'left',
                 }}
               >
-                Nous offrons à chaque espace une touche esthétique unique grâce à nos services de finissions intérieures et extérieures. Du carrelage et de la peinture aux plafonds en plâtre et travaux de décoration, nous prenons soin du moindre détail pour créer des environnements élégants, modernes, en harmonie avec votre style et votre goût raffiné.
+                {translations.description}
               </Typography>
 
               {/* Contact Button */}
               <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <Button
                   variant="contained"
+                  onClick={handleScrollToContact}
                   sx={{
                     backgroundColor: '#FF9800',
                     color: 'white',
@@ -163,7 +186,7 @@ function Rectangle() {
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  Contactez-nous
+                  {translations.contactButton}
                 </Button>
               </Box>
             </Box>

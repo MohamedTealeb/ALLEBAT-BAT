@@ -65,7 +65,8 @@ function Contact() {
               boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
               direction: isArabic ? 'rtl' : 'ltr',
               marginTop: { xs: '20px', md: '100px' },
-              position: 'absolute',
+              position: { xs: 'relative', md: 'absolute' },
+              zIndex: 2,
             }}
           >
             <Typography
@@ -252,11 +253,12 @@ function Contact() {
             color: '#fff',
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            width: '60%',
-            marginLeft: { xs: '20px', md: '355px' },
-           
-            gap: 3,
+            justifyContent: { xs: 'center', md: 'space-between' },
+            width: { xs: '95%', md: '60%' },
+            marginLeft: { xs: 'auto', md: '355px' },
+            marginRight: { xs: 'auto', md: 0 },
+            mx: { xs: 'auto', md: 0 },
+            gap: { xs: 2, md: 3 },
           }}
         >
           {/* Phone */}

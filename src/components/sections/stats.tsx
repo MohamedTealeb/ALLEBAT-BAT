@@ -1,6 +1,14 @@
+'use client'
 import { Box, Typography, Container } from '@mui/material';
+import { usePathname } from 'next/navigation';
+import arTranslations from '@/translation/ar.json';
+import frTranslations from '@/translation/fr.json';
 
 function Stats() {
+  const pathname = usePathname();
+  const isArabic = pathname?.startsWith('/ar');
+  const translations = isArabic ? arTranslations.stats : frTranslations.stats;
+  
   return (
     <Box sx={{ 
       marginTop: { xs: '60px', md: '100px' },
@@ -94,9 +102,10 @@ function Stats() {
                   color: '#666',
                   textTransform: 'uppercase',
                   letterSpacing: '0.5px',
+                  direction: isArabic ? 'rtl' : 'ltr',
                 }}
               >
-                PROJETS TERMINÉS
+                {translations.projectsCompleted}
               </Typography>
             </Box>
 
@@ -163,9 +172,10 @@ function Stats() {
                   color: '#666',
                   textTransform: 'capitalize',
                   letterSpacing: '0.5px',
+                  direction: isArabic ? 'rtl' : 'ltr',
                 }}
               >
-                Années d&apos;expérience
+                {translations.yearsExperience}
               </Typography>
             </Box>
 
@@ -232,9 +242,10 @@ function Stats() {
                   color: '#666',
                   textTransform: 'capitalize',
                   letterSpacing: '0.5px',
+                  direction: isArabic ? 'rtl' : 'ltr',
                 }}
               >
-                Nombre de visiteurs
+                {translations.visitors}
               </Typography>
             </Box>
         </Box>
